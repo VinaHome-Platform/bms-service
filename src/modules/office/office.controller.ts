@@ -116,4 +116,24 @@ export class OfficeController {
       });
     }
   }
+
+  @MessagePattern({ bms: 'get_list_office_by_company_2' })
+  async getListOfficeByCompany_2(@Payload() id: number) {
+    try {
+      const result = await this.officeService.getListOfficeByCompany_2(id);
+      return {
+        success: true,
+        statusCode: HttpStatus.OK,
+        message: 'Lấy danh sách văn phòng thành công',
+        result,
+      };
+    } catch (error) {
+      throw new RpcException({
+        success: false,
+        message:
+          error.response?.message || error.message || 'Lỗi máy chủ dịch vụ!',
+        statusCode: error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
 }

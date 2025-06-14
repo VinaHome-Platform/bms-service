@@ -23,6 +23,19 @@ export class DTO_RP_Office {
   created_at: Date;
   phones: DTO_RP_OfficePhone[];
 }
+
+export class DTO_RP_Office_2 {
+  id: number;
+  name: string;
+  code: string;
+  address: string;
+  status: boolean;
+  company_id: number;
+  company_name: string;
+  company_code: string;
+  phones: DTO_RP_OfficePhone[];
+}
+
 export class DTO_RP_OfficePhone {
   id: number;
   phone: string;

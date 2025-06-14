@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Office } from '../office/office.entity';
+import { Route } from '../route/route.entity';
 
 @Entity('tbl_company')
 export class Company {
@@ -45,4 +46,7 @@ export class Company {
 
   @OneToMany(() => Office, (office) => office.company)
   offices: Office[];
+
+  @OneToMany(() => Route, (route) => route.company)
+  routes: Route[];
 }

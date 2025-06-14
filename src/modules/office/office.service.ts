@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import {
   DTO_RP_Office,
+  DTO_RP_Office_2,
   DTO_RQ_CreateOffice,
   DTO_RQ_UpdateOffice,
 } from './office.dto';
@@ -226,6 +227,34 @@ export class OfficeService {
     return company.offices.map((office) => ({
       id: office.id,
       name: office.name,
+    }));
+  }
+
+  async getListOfficeByCompany_2(id: number): Promise<DTO_RP_Office_2[]> {
+    const company = await this.companyRepository.findOne({
+      where: { id },
+      relations: ['offices', 'offices.phones'],
+    });
+
+    if (!company) {
+      throw new NotFoundException('Công ty không tồn tại');
+    }
+
+    return company.offices.map((office) => ({
+      id: office.id,
+      name: office.name,
+      code: office.code,
+      address: office.address,
+      note: office.note,
+      status: office.status,
+      phones: (office.phones || []).map((phone) => ({
+        id: phone.id,
+        phone: phone.phone,
+        type: phone.type,
+      })),
+      company_id: company.id,
+      company_name: company.name,
+      company_code: company.code,
     }));
   }
 }

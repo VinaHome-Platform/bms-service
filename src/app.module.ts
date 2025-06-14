@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { CompanyModule } from './modules/company/company.module';
+import { RouteModule } from './modules/route/route.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { CompanyModule } from './modules/company/company.module';
     }),
     CompanyModule,
     OfficeModule,
+    RouteModule,
   ],
   controllers: [],
   providers: [],
